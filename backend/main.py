@@ -12,11 +12,15 @@ from dotenv import load_dotenv
 load_dotenv()
 import sys
 from pathlib import Path
+from sqlalchemy import create_engine
+import os
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///agent_economy.db")
 models.Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(
     title="Agent Economy — Negotiation Platform",
