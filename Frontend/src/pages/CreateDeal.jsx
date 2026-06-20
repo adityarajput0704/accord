@@ -20,11 +20,11 @@ function CreateDeal() {
     vendorPrice !== '' &&
     requirements.trim() !== '';
 
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
-
   const handleSubmit = async () => {
     if (!isFormValid || submitting) return;
     setSubmitting(true);
+
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
 
     try {
       const dealResponse = await fetch(`${baseUrl}/api/deals`, {

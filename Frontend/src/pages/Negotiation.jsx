@@ -7,6 +7,8 @@ import NegotiationTimeline from '../components/NegotiationTimeline';
 
 const formatCurrency = (val) => `$${Number(val).toLocaleString()}`;
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
+
 const defaultDeal = {
   contractType: 'Freelance Development Contract',
   clientBudget: 5000,
@@ -36,8 +38,6 @@ function Negotiation() {
   useEffect(() => {
     let active = true;
 
-    const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
-
     async function runFlow() {
       try {
         let dId = dealId;
@@ -62,7 +62,7 @@ function Negotiation() {
           dId = dealData.id;
           if (active) setDealId(dId);
 
-          const sessionRes = await fetch(`/api/deals/${dId}/negotiate`, { method: 'POST' });
+          const sessionRes = await fetch(`${baseUrl}/api/deals/${dId}/negotiate`, { method: 'POST' });
           if (!sessionRes.ok) {
             const err = await sessionRes.json();
             throw new Error(err.detail || 'Failed to initialize session');
