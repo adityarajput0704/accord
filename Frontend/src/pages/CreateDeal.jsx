@@ -27,7 +27,7 @@ function CreateDeal() {
     const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
 
     try {
-      const dealResponse = await fetch(`${baseUrl}/api/deals`, {
+      const dealResponse = await fetch(`${baseUrl}/deals`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ function CreateDeal() {
       }
       const dealData = await dealResponse.json();
 
-      const sessionResponse = await fetch(`${baseUrl}/api/deals/${dealData.id}/negotiate`, {
+      const sessionResponse = await fetch(`${baseUrl}/deals/${dealData.id}/negotiate`, {
         method: 'POST',
       });
 

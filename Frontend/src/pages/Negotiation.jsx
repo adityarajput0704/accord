@@ -44,7 +44,7 @@ function Negotiation() {
         let sId = sessionId;
 
         if (!dId || !sId) {
-          const dealRes = await fetch(`${baseUrl}/api/deals`, {
+          const dealRes = await fetch(`${baseUrl}/deals`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -62,7 +62,7 @@ function Negotiation() {
           dId = dealData.id;
           if (active) setDealId(dId);
 
-          const sessionRes = await fetch(`${baseUrl}/api/deals/${dId}/negotiate`, { method: 'POST' });
+          const sessionRes = await fetch(`${baseUrl}/deals/${dId}/negotiate`, { method: 'POST' });
           if (!sessionRes.ok) {
             const err = await sessionRes.json();
             throw new Error(err.detail || 'Failed to initialize session');
@@ -72,7 +72,7 @@ function Negotiation() {
           if (active) setSessionId(sId);
         }
 
-        const runRes = await fetch(`${baseUrl}/api/sessions/${sId}/run`, { method: 'POST' });
+        const runRes = await fetch(`${baseUrl}/sessions/${sId}/run`, { method: 'POST' });
         if (!runRes.ok) {
           const err = await runRes.json();
           throw new Error(err.detail || 'Failed to execute negotiation');
@@ -137,7 +137,7 @@ function Negotiation() {
     if (!sessionId || settling) return;
     setSettling(true);
     try {
-      const response = await fetch(`${baseUrl}/api/sessions/${sessionId}/settle`,{
+      const response = await fetch(`${baseUrl}/sessions/${sessionId}/settle`,{
         method: 'POST',
       });
       if (!response.ok) {

@@ -17,7 +17,7 @@ function History() {
 
     async function fetchHistory() {
       try {
-        const response = await fetch(`${baseUrl}/api/deals`);
+        const response = await fetch(`${baseUrl}/deals`);
         if (!response.ok) {
           const err = await response.json();
           throw new Error(err.detail || 'Failed to fetch deals');
@@ -30,7 +30,7 @@ function History() {
 
             let rounds = [];
             try {
-             const roundsRes = await fetch(`${baseUrl}/api/sessions/${sessionId}/rounds`);
+             const roundsRes = await fetch(`${baseUrl}/sessions/${sessionId}/rounds`);
               if (roundsRes.ok) {
                 rounds = await roundsRes.json();
               }
@@ -40,7 +40,7 @@ function History() {
 
             let agreement = null;
             try {
-              const agreementRes = await fetch(`${baseUrl}/api/sessions/${sessionId}/agreement`);
+              const agreementRes = await fetch(`${baseUrl}/sessions/${sessionId}/agreement`);
               if (agreementRes.ok) {
                 agreement = await agreementRes.json();
               }
